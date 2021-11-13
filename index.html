@@ -77,13 +77,13 @@
     <table>
         <tbody>
         <tr>
-        <td id="player1name" style="font-size:20px;height:6vh;border:none;"></td>
-        <td id="player2name" style="font-size:20px;height:6vh;border:none;"></td>
+        <td id="player1name" style="font-size:20px;height:6vh;border:none;">Player 1</td>
+        <td id="player2name" style="font-size:20px;height:6vh;border:none;">Player 2</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
-        <td id="player3name" style="font-size:20px;height:6vh;border:none;"></td>
-        <td id="player4name" style="font-size:20px;height:6vh;border:none;"></td>
+        <td id="player3name" style="font-size:20px;height:6vh;border:none;">Player 3</td>
+        <td id="player4name" style="font-size:20px;height:6vh;border:none;">Player 4</td>
         </tr>
         <tr>
             <td class="scoringBoxes" id="player1Box20"></td>
@@ -184,18 +184,16 @@
         'player4name' : "Player 4",
         }
 
-    for (i = 1; i < 5; i++) {
-        names[`player${i}name`] = prompt(`Enter player ${i} name (NAME CANNOT BE LONGER THAN 'THRILLHO'):`);
-        if (names[`player${i}name`] === "" || names[`player${i}name`] === null ) {
-            names[`player${i}name`] = `Player ${i}`
-            document.getElementById(`player${i}name`).textContent = `Player ${i}`;
-        } else {
-            document.getElementById(`player${i}name`).textContent = names[`player${i}name`];
-        }
+    // for (i = 1; i < 5; i++) {
+    //     names[`player${i}name`] = prompt(`Enter player ${i} name (NAME CANNOT BE LONGER THAN 'THRILLHO'):`);
+    //     if (names[`player${i}name`] === "" || names[`player${i}name`] === null ) {
+    //         names[`player${i}name`] = `Player ${i}`
+    //         document.getElementById(`player${i}name`).textContent = `Player ${i}`;
+    //     } else {
+    //         document.getElementById(`player${i}name`).textContent = names[`player${i}name`];
+    //     }
 
-    }
-
-    console.log(names)
+    // }
 
     const scoreBoxes = {};
 
@@ -213,10 +211,6 @@
     }
 
     document.querySelector('.gameStatus').textContent = `Current player turn: ${names[`player1name`]}`;
-
-
-
-    console.log(scoreBoxes);
     
     const scoring = (number,multiplier) => {
         let currentPlayer = `player${playerNumber}`

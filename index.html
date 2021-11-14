@@ -12,15 +12,19 @@
         color: azure;
 
     }
-    td {
+    span {
         width: 100px;
+        height: 8vh;
         text-align: center;
-        font-size: 40px;
+        font-size: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         font-family: Arial, sans-serif;
     }
     button {
         width: 100%;
-        height: 7vh;
+        height: 9vh;
         font-size: 24px;
         background-color: #215154;
         color: azure;
@@ -39,10 +43,7 @@
         display: flex;
         justify-content: space-around;
     }
-    .singBull, .dblBull {
-        width: 150px;
-    } 
-    .missButton {
+    .singBull, .dblBull, .missButton {
         width: 100%;
     }
 
@@ -52,11 +53,6 @@
     .dblBull {
         background-color: red;
     }
-
-    .scoringBoxes {
-        font-size: 60px;
-    }
-
     #player1ScoreBox, #player1name { grid-area: 1 / 1 / 2 / 2; border: 4px solid azure; font-size: 60px;height: 8vh;}
     #player2ScoreBox, #player2name { grid-area: 1 / 2 / 2 / 3; border: 4px solid azure; font-size: 60px;height: 8vh;}
     #player3ScoreBox, #player3name { grid-area: 1 / 6 / 2 / 7; border: 4px solid azure; font-size: 60px;height: 8vh;}
@@ -73,97 +69,83 @@
 
 </style>
 <body>
-
-    <table>
-        <tbody>
-        <tr>
-        <td id="player1name" style="font-size:20px;height:6vh;border:none;">Player 1</td>
-        <td id="player2name" style="font-size:20px;height:6vh;border:none;">Player 2</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-        <td id="player3name" style="font-size:20px;height:6vh;border:none;">Player 3</td>
-        <td id="player4name" style="font-size:20px;height:6vh;border:none;">Player 4</td>
-        </tr>
-        <tr>
-            <td class="scoringBoxes" id="player1Box20"></td>
-            <td class="scoringBoxes" id="player2Box20"></td>
-            <td><button id="3x20" onclick=scoring(20,3)>20 x 3</button></td>
-            <td><button id="2x20" onclick=scoring(20,2)>20 x 2</button></td>
-            <td><button id="1x20" onclick=scoring(20,1)>20</button></td>
-            <td class="scoringBoxes" id="player3Box20"></td>
-            <td class="scoringBoxes" id="player4Box20"></td>
-        </tr>
-        <tr>
-            <td class="scoringBoxes" id="player1Box19"></td>
-            <td class="scoringBoxes" id="player2Box19"></td>
-            <td><button id="3x19" onclick=scoring(19,3)>19 x 3</button></td>
-            <td><button id="2x19" onclick=scoring(19,2)>19 x 2</button></td>
-            <td><button id="1x19" onclick=scoring(19,1)>19</button></td>
-            <td class="scoringBoxes" id="player3Box19"></td>
-            <td class="scoringBoxes" id="player4Box19"></td>
-        </tr>
-        <tr>
-            <td class="scoringBoxes" id="player1Box18"></td>
-            <td class="scoringBoxes" id="player2Box18"></td>
-            <td><button id="3x18" onclick=scoring(18,3)>18 x 3</button></td>
-            <td><button id="2x18" onclick=scoring(18,2)>18 x 2</button></td>
-            <td><button id="1x18" onclick=scoring(18,1)>18</button></td>
-            <td class="scoringBoxes" id="player3Box18"></td>
-            <td class="scoringBoxes" id="player4Box18"></td>
-        </tr>
-        <tr>
-            <td class="scoringBoxes" id="player1Box17"></td>
-            <td class="scoringBoxes" id="player2Box17"></td>
-            <td><button id="3x17" onclick=scoring(17,3)>17 x 3</button></td>
-            <td><button id="2x17" onclick=scoring(17,2)>17 x 2</button></td>
-            <td><button id="1x17" onclick=scoring(17,1)>17</button></td>
-            <td class="scoringBoxes" id="player3Box17"></td>
-            <td class="scoringBoxes" id="player4Box17"></td>
-        </tr>
-        <tr>
-            <td class="scoringBoxes" id="player1Box16"></td>
-            <td class="scoringBoxes" id="player2Box16"></td>
-            <td><button id="3x16" onclick=scoring(16,3)>16 x 3</button></td>
-            <td><button id="2x16" onclick=scoring(16,2)>16 x 2</button></td>
-            <td><button id="1x16" onclick=scoring(16,1)>16</button></td>
-            <td class="scoringBoxes" id="player3Box16"></td>
-            <td class="scoringBoxes" id="player4Box16"></td>
-        </tr>
-        <tr>
-            <td class="scoringBoxes" id="player1Box15"></td>
-            <td class="scoringBoxes" id="player2Box15"></td>
-            <td><button id="3x15" onclick=scoring(15,3)>15 x 3</button></td>
-            <td><button id="2x15" onclick=scoring(15,2)>15 x 2</button></td>
-            <td><button id="1x15" onclick=scoring(15,1)>15</button></td>
-            <td class="scoringBoxes" id="player3Box15"></td>
-            <td class="scoringBoxes" id="player4Box15"></td>
-        </tr>
-        <tr>
-            <td class="scoringBoxes" id="player1Box25"></td>
-            <td class="scoringBoxes" id="player2Box25"></td>
-            <td colspan="3">
-                <table>
-                    <tbody>
-                    <tr>
-                        <td><button class="dblBull" id="2x25" onclick=scoring(25,2)>DOUBLE BULL</button></td>
-                        <td><button class="singBull" id="1x25" onclick=scoring(25,1)>BULL</button></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </td>
-            <td class="scoringBoxes" id="player3Box25"></td>
-            <td class="scoringBoxes" id="player4Box25"></td>
-        </tr>
-        <tr>
-            <td id="player1ScoreBox">0</td>
-            <td id="player2ScoreBox">0</td>
-            <td colspan="3"><button id="miss" onclick=scoring(0,0)>MISS</button></td>
-            <td id="player3ScoreBox">0</td>
-            <td id="player4ScoreBox">0</td>
-        </tr>
-        </tbody>
-        </table>
+    <div class="playerNames">
+        <span id="player1name" style="font-size:20px;height:6vh;border:none;"></span>
+        <span id="player2name" style="font-size:20px;height:6vh;border:none;"></span>
+        <span id="player3name" style="font-size:20px;height:6vh;border:none;"></span>
+        <span id="player4name" style="font-size:20px;height:6vh;border:none;"></span>
+    </div>
+    <div class="twenty">
+        <span id="player1Box20"></span>
+        <span id="player2Box20"></span>
+        <button id="3x20" onclick=scoring(20,3)>20 x 3</button>
+        <button id="2x20" onclick=scoring(20,2)>20 x 2</button>
+        <button id="1x20" onclick=scoring(20,1)>20</button>
+        <span id="player3Box20"></span>
+        <span id="player4Box20"></span>
+    </div>
+    <div class="nineteen">
+        <span id="player1Box19"></span>
+        <span id="player2Box19"></span>
+        <button id="3x19" onclick=scoring(19,3)>19 x 3</button>
+        <button id="2x19" onclick=scoring(19,2)>19 x 2</button>
+        <button id="1x19" onclick=scoring(19,1)>19</button>
+        <span id="player3Box19"></span>
+        <span id="player4Box19"></span>
+    </div>
+    <div class="eighteen">
+        <span id="player1Box18"></span>
+        <span id="player2Box18"></span>
+        <button id="3x18" onclick=scoring(18,3)>18 x 3</button>
+        <button id="2x18" onclick=scoring(18,2)>18 x 2</button>
+        <button id="1x18" onclick=scoring(18,1)>18</button>
+        <span id="player3Box18"></span>
+        <span id="player4Box18"></span>
+    </div>
+    <div class="seventeen">
+        <span id="player1Box17"></span>
+        <span id="player2Box17"></span>
+        <button id="3x17" onclick=scoring(17,3)>17 x 3</button>
+        <button id="2x17" onclick=scoring(17,2)>17 x 2</button>
+        <button id="1x17" onclick=scoring(17,1)>17</button>
+        <span id="player3Box17"></span>
+        <span id="player4Box17"></span>
+    </div>
+    <div class="sixteen">
+        <span id="player1Box16"></span>
+        <span id="player2Box16"></span>
+        <button id="3x16" onclick=scoring(16,3)>16 x 3</button>
+        <button id="2x16" onclick=scoring(16,2)>16 x 2</button>
+        <button id="1x16" onclick=scoring(16,1)>16</button>
+        <span id="player3Box16"></span>
+        <span id="player4Box16"></span>
+    </div>
+    <div class="fifteen">
+        <span id="player1Box15"></span>
+        <span id="player2Box15"></span>
+        <button id="3x15" onclick=scoring(15,3)>15 x 3</button>
+        <button id="2x15" onclick=scoring(15,2)>15 x 2</button>
+        <button id="1x15" onclick=scoring(15,1)>15</button>
+        <span id="player3Box15"></span>
+        <span id="player4Box15"></span>
+    </div>
+    <div class="bull">
+        <span id="player1Box25"></span>
+        <span id="player2Box25"></span>
+        <div class="bullButtons">
+            <button class="dblBull" id="2x25" onclick=scoring(25,2)>DOUBLE BULL</button>
+            <button class="singBull" id="1x25" onclick=scoring(25,1)>BULL</button>
+        </div>
+        <span id="player3Box25"></span>
+        <span id="player4Box25"></span>
+    </div>
+    <div class="scoring">
+        <span id="player1ScoreBox">0</span>
+        <span id="player2ScoreBox">0</span>
+        <button id="miss" onclick=scoring(0,0)>MISS</button>
+        <span id="player3ScoreBox">0</span>
+        <span id="player4ScoreBox">0</span>
+    </div>
     <div class="gameStatus">Current player turn: </div>
     <div class="dartCount">Dart number: 1</div>
 </body>
@@ -184,16 +166,18 @@
         'player4name' : "Player 4",
         }
 
-    // for (i = 1; i < 5; i++) {
-    //     names[`player${i}name`] = prompt(`Enter player ${i} name (NAME CANNOT BE LONGER THAN 'THRILLHO'):`);
-    //     if (names[`player${i}name`] === "" || names[`player${i}name`] === null ) {
-    //         names[`player${i}name`] = `Player ${i}`
-    //         document.getElementById(`player${i}name`).textContent = `Player ${i}`;
-    //     } else {
-    //         document.getElementById(`player${i}name`).textContent = names[`player${i}name`];
-    //     }
+    for (i = 1; i < 5; i++) {
+        names[`player${i}name`] = prompt(`Enter player ${i} name (NAME CANNOT BE LONGER THAN 'THRILLHO'):`);
+        if (names[`player${i}name`] === "" || names[`player${i}name`] === null ) {
+            names[`player${i}name`] = `Player ${i}`
+            document.getElementById(`player${i}name`).textContent = `Player ${i}`;
+        } else {
+            document.getElementById(`player${i}name`).textContent = names[`player${i}name`];
+        }
 
-    // }
+    }
+
+    console.log(names)
 
     const scoreBoxes = {};
 
@@ -211,6 +195,10 @@
     }
 
     document.querySelector('.gameStatus').textContent = `Current player turn: ${names[`player1name`]}`;
+
+
+
+    console.log(scoreBoxes);
     
     const scoring = (number,multiplier) => {
         let currentPlayer = `player${playerNumber}`

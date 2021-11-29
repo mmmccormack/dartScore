@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+        body {
+        background-color: #253225;
+        color: azure;
+
+    }
+    span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 120px;
+        height: 12vh;
+        text-align: center;
+        font-size: 30px;
+        font-family: Arial, sans-serif;
+    }
+    button {
+        width: 100%;
+        height: 10vh;
+        font-size: 25px;
+        background-color: #410303;
+        color: azure;
+        border: 4px solid #210101;
+        border-radius: 24px;
+        box-shadow: 4px 4px #220f0f;
+    }
+    button:active {
+        box-shadow: none;
+        position: relative;
+        top: 4px;
+        left: 4px;
+    }
+    .singBull {
+        background-color: green;
+    }
+    .dblBull {
+        background-color: red;
+    }
+    .multButtons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        width: 100%;
+        justify-items: center;
+    }
+    .scorekeeping {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 1fr 1fr 1fr;
+        width: 100%;
+        justify-items: center;
+    }
+    .scoreWindows {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .scoreBoxes {
+        border: 4px solid azure;
+        height: 8vh;
+        margin: 0 20px;
+    }
+    .firstDartPositions {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: 1fr;
+        width: 100%;
+        justify-items: center;
+    }
+    .lastDartPositions {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: 1fr;
+        width: 100%;
+        justify-items: center;
+    }
+    .extraButtons {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .back {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 100px 100px 0 0;
+        border-color: #ffe600 transparent transparent transparent;
+        display: inline-block;
+        position: absolute;
+        top: 0;
+    }
+    .goBack {
+        position: absolute;
+        top: -120px;
+        left: -26px;
+        color: black;
+        font-size: 60px;
+    }
+
+</style>
+<body>
+    <div class="scorekeeping">
+            <span id="player1name"></span>
+            <span id="player2name"></span>
+            <span id="player3name"></span>
+            <span id="player4name"></span>
+            <span id="player1previousScore"></span>
+            <span id="player2previousScore"></span>
+            <span id="player3previousScore"></span>
+            <span id="player4previousScore"></span>
+            <span id="player1currentScore"></span>
+            <span id="player2currentScore"></span>
+            <span id="player3currentScore"></span>
+            <span id="player4currentScore"></span>
+    </div>
+    <div class="scoreWindows">
+        <span id="dart1" class="scoreBoxes"></span>
+        <span id="dart2" class="scoreBoxes"></span>
+        <span id="dart3" class="scoreBoxes"></span>
+    </div>
+    <div class="multButtons">
+        <button class="singleButton" onclick=setMult(3)>TRIPLE</button>
+        <button class="singleButton" onclick=setMult(2)>DOUBLE</button>
+    </div>
+    <div class="firstDartPositions">
+        <button class="singleButton" onclick=scoring(20) id="1x20">20</button>
+        <button class="singleButton" onclick=scoring(19) id="1x19">19</button>
+        <button class="singleButton" onclick=scoring(18) id="1x18">18</button>
+        <button class="singleButton" onclick=scoring(17) id="1x17">17</button>
+        <button class="singleButton" onclick=scoring(16) id="1x16">16</button>
+        <button class="singleButton" onclick=scoring(15) id="1x15">15</button>
+        <button class="singleButton" onclick=scoring(14) id="1x14">14</button>
+        <button class="singleButton" onclick=scoring(13) id="1x13">13</button>
+        <button class="singleButton" onclick=scoring(12) id="1x12">12</button>
+        <button class="singleButton" onclick=scoring(11) id="1x11">11</button>
+        <button class="singleButton" onclick=scoring(10) id="1x10">10</button>
+        <button class="singleButton" onclick=scoring(9) id="1x9">9</button>
+        <button class="singleButton" onclick=scoring(8) id="1x8">8</button>
+        <button class="singleButton" onclick=scoring(7) id="1x7">7</button>
+    </div>
+    <div class="lastDartPositions">
+        <button class="singleButton" onclick=scoring(6) id="1x6">6</button>
+        <button class="singleButton" onclick=scoring(5) id="1x5">5</button>
+        <button class="singleButton" onclick=scoring(4) id="1x4">4</button>
+        <button class="singleButton" onclick=scoring(3) id="1x3">3</button>
+        <button class="singleButton" onclick=scoring(2) id="1x2">2</button>
+        <button class="singleButton" onclick=scoring(1) id="1x1">1</button>
+    </div>
+
+    <div class="extraButtons">
+        <button class="dblBull" id="2x25" onclick=scoring(50)>DOUBLE BULL</button>
+        <button class="singBull" id="1x25" onclick=scoring(25)>BULL</button>
+        <button id="miss" onclick=scoring(0)>MISS</button>
+    </div>
+
+    <div class="back"><a href="index.html"><span class="goBack">←</span></a></div>
+</body>
+
+<script>
+
+    let playerNumber = 1;
+    let numberOfDartsThrown = 0;
+    let mult = 1;
+    const turnResult = [];
+    let numberOfPlayers = prompt('Please enter the number of players (1-4).');
+    numberOfPlayers++;
+
+    const scores = {};
+    const names = {};
+
+    for (i = 1; i < numberOfPlayers; i++) {
+        scores[`player${i}`] = 301;
+        names[`player${i}name`] = `Player ${i}`;
+    }
+
+    for (i = 1; i < numberOfPlayers; i++) {
+        names[`player${i}name`] = prompt(`Enter player ${i} name (NAME CANNOT BE LONGER THAN 'THRILLHO'):`);
+        if (names[`player${i}name`] === "" || names[`player${i}name`] === null ) {
+            names[`player${i}name`] = `Player ${i}`
+            document.getElementById(`player${i}name`).textContent = `Player ${i}`;
+            document.getElementById(`player${i}previousScore`).textContent = scores[`player${i}`];
+        } else {
+            document.getElementById(`player${i}name`).textContent = names[`player${i}name`];
+        }
+    }
+
+    const setMult = (multiplier) => {
+        mult = multiplier;
+    }
+
+    const resetScoring = () => {
+        setTimeout(function(){ 
+            for (i = 1; i < 4; i++) {
+                document.getElementById(`dart${i}`).textContent = "";
+            }
+        }, 2000);
+    }
+
+
+    const scoring = number => {
+        dartTotal = number * mult;
+        turnResult.push(dartTotal);
+        document.getElementById(`dart${numberOfDartsThrown+1}`).textContent = turnResult[numberOfDartsThrown];
+        numberOfDartsThrown++;
+        if (numberOfDartsThrown === 3) {
+            const total = turnResult.reduce((accumulator, currentValue) => {
+                // accumulator is the current running total, while the currentValue is the number associated with the variable
+                return accumulator + currentValue
+                // the zero at the end is the initial value of the count before reducing
+                }, 0)
+            turnResult.length = 0;
+            if (scores[`player${playerNumber}`] - total === 0 && mult === 2) {
+                alert(names[`player${playerNumber}name`] + " wins!");
+            } else if (scores[`player${playerNumber}`] - total <= 1){
+                document.getElementById(`player${playerNumber}previousScore`).textContent = scores[`player${playerNumber}`];
+                document.getElementById(`player${playerNumber}previousScore`).style.textDecoration = 'line-through';
+                document.getElementById(`player${playerNumber}currentScore`).textContent = scores[`player${playerNumber}`];
+            } else {
+                document.getElementById(`player${playerNumber}previousScore`).textContent = scores[`player${playerNumber}`];
+                document.getElementById(`player${playerNumber}previousScore`).style.textDecoration = 'line-through';
+                document.getElementById(`player${playerNumber}currentScore`).textContent = scores[`player${playerNumber}`] - total;
+                scores[`player${playerNumber}`] = scores[`player${playerNumber}`] - total;
+            }
+            numberOfDartsThrown = 0;
+            playerNumber++;
+            if (playerNumber === numberOfPlayers) {
+                playerNumber = 1;
+            }
+            resetScoring();
+        }
+        mult = 1;
+    }
+
+    
+
+</script>
+
+</html>

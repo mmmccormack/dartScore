@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>301</title>
+    <title>501</title>
 </head>
 <style>
         body {
@@ -179,11 +179,11 @@
     // function to hold player names
     const getPlayerNames = numOfPlayers => {
         for (i = 1; i < (numOfPlayers + 1); i++) {
-            scores[`player${i}`] = 301;
+            scores[`player${i}`] = 501;
             names[`player${i}name`] = prompt(`Enter player ${i} name (NAME CANNOT BE LONGER THAN 'THRILLHO'):`);
             if (names[`player${i}name`] === "" || names[`player${i}name`] === null ) {
                 names[`player${i}name`] = `Player ${i}`;
-                scores[`player${i}`] = 301;
+                scores[`player${i}`] = 501;
                 document.getElementById(`player${i}name`).textContent = `Player ${i}`;
             } else {
                 document.getElementById(`player${i}name`).textContent = names[`player${i}name`];

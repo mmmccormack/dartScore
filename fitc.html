@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>FITC</title>
 </head>
 <style>
     body {
@@ -208,42 +208,44 @@
     let playerNumber = 1;
     let numberOfDartsThrown = 0;
     let mult = 1;
-    let numberOfPlayers = prompt('Please enter the number of players (1-4).');
-    if (numberOfPlayers === null || numberOfPlayers === undefined) {
-        numberOfPlayers = prompt('Please enter the NUMBER of players (1-4).');
-    } else if (typeof(numberOfPlayers) != "number"){
-        numberOfPlayers = prompt('Please enter the NUMBER of players (1-4).');
-    } else if (numberOfPlayers > 4){
-        numberOfPlayers = prompt('Please enter the NUMBER of players (1-4).');
-    } else {
-        numberOfPlayers++;
-    }
+    let numberOfPlayers = 4;
 
-    const scores = {};
-    const names = {};
-
-    for (i = 1; i < numberOfPlayers; i++) {
-        scores[`player${i}`] = 0;
+const scores = {};
+const names = {};
+// function to hold player names
+const getPlayerNames = numOfPlayers => {
+    for (i = 1; i < numOfPlayers + 1; i++) {
+    scores[`player${i}`] = 0;
+    names[`player${i}name`] = prompt(`Enter player ${i} name (NAME CANNOT BE LONGER THAN 'THRILLHO'):`);
+    if (names[`player${i}name`] === "" || names[`player${i}name`] === null ) {
         names[`player${i}name`] = `Player ${i}`;
+        scores[`player${i}`] = 0;
+        document.getElementById(`player${i}name`).textContent = `Player ${i}`;
+    } else {
+        document.getElementById(`player${i}name`).textContent = names[`player${i}name`];
     }
-
-    for (i = 1; i < numberOfPlayers; i++) {
-        names[`player${i}name`] = prompt(`Enter player ${i} name (NAME CANNOT BE LONGER THAN 'THRILLHO'):`);
-        if (names[`player${i}name`] === "" || names[`player${i}name`] === null ) {
-            names[`player${i}name`] = `Player ${i}`
-            document.getElementById(`player${i}name`).textContent = `Player ${i}`;
-        } else {
-            document.getElementById(`player${i}name`).textContent = names[`player${i}name`];
-        }
-
+}
+}
+// function to get number of players
+const getNumberOfPlayers = () => {
+    numberOfPlayers = prompt("Please enter the number of players (1-4).");
+    if (~~numberOfPlayers > 0 && ~~numberOfPlayers < 5){
+        console.log(typeof(~~numberOfPlayers));
+        console.log(~~numberOfPlayers);
+        getPlayerNames(~~numberOfPlayers);
+    } else {
+        getNumberOfPlayers();
     }
+}
+getNumberOfPlayers();
+
 
     const scoreBoxes = {};
 
     for (dartPosition = 11; dartPosition < 26; dartPosition++) {
         if (dartPosition > 20 && dartPosition < 25) {continue;}
             scoreBoxes[`isClosed${dartPosition}`] = false;
-        for (playNum = 1; playNum < 5; playNum++) {
+        for (playNum = 1; playNum < (~~numberOfPlayers + 1); playNum++) {
             scoreBoxes[`fullOpen${dartPosition}player${playNum}`] = dartPosition * 3;
             scoreBoxes[`doubleOpen${dartPosition}player${playNum}`] = dartPosition * 2;
             scoreBoxes[`singleOpen${dartPosition}player${playNum}`] = dartPosition;
@@ -284,9 +286,21 @@
         } else if (scoreBoxes[`scoreOn${number}${currentPlayer}`] <= scoreBoxes[`singleOpen${number}${currentPlayer}`]) {
             document.getElementById(`${currentPlayer}Box${number}`).textContent = `※`;
             scoreBoxes[`isOpenBox${currentPlayer}${number}`] = true;
-            if (scoreBoxes[`isOpenBoxplayer1${number}`] && scoreBoxes[`isOpenBoxplayer2${number}`] && scoreBoxes[`isOpenBoxplayer3${number}`] && scoreBoxes[`isOpenBoxplayer4${number}`]) {
-                scoreBoxes[`isClosed${number}`] = true;
+            const playerCellOpenOrClosed = [];
+            for (i = 1; i < (~~numberOfPlayers + 1); i++){
+                if (scoreBoxes[`isOpenBoxplayer${i}${number}`]){
+                    playerCellOpenOrClosed.push(1);
+                } else {
+                    playerCellOpenOrClosed.push(0);
+                }
             }
+            function add(accumulator, a) {
+            return accumulator + a;
+            }
+            const sum = playerCellOpenOrClosed.reduce(add, 0);
+            if (sum === ~~numberOfPlayers) {
+                scoreBoxes[`isClosed${number}`] = true;
+            } 
             if (scoreBoxes[`isClosed${number}`] === false) {
                 scores[currentPlayer] = scores[currentPlayer] + (scoreBoxes[`scoreOn${number}${currentPlayer}`] * - 1);
                 document.getElementById(`${currentPlayer}ScoreBox`).textContent = scores[currentPlayer];
@@ -305,7 +319,7 @@
         }
         numberOfDartsThrown++;
         document.querySelector('.dartCount').textContent = `Throw: ${numberOfDartsThrown + 1}`;
-        if (numberOfDartsThrown === 3 && playerNumber === numberOfPlayers-1) {
+        if (numberOfDartsThrown === 3 && playerNumber === ~~numberOfPlayers) {
             playerNumber = 1;
             numberOfDartsThrown = 0;
             document.querySelector('.gameStatus').textContent = `Turn: ${names[`player${playerNumber}name`]}`;

@@ -76,8 +76,9 @@
         font-family: Arial, sans-serif;
         font-size: 28px;
         text-align: center;
-        padding: 5px 0;
+        padding: 5px;
         display: inline;
+        
     }
     .back {
         width: 0;
@@ -97,11 +98,15 @@
         color: black;
         font-size: 60px;
     }
+    .activePlayer {
+        background: yellow;
+        color: black;
+    }
 
 </style>
 <body>
     <div class="playerNames">
-        <span id="player1name" style="font-size:20px;height:6vh;border:none;"></span>
+        <span id="player1name" class="activePlayer" style="font-size:20px;height:6vh;border:none;"></span>
         <span id="player2name" style="font-size:20px;height:6vh;border:none;"></span>
         <div class="bullButtons">
             <button class="singleButton" id="2x25" onclick=setMult(3)>TRIPLE</button>
@@ -304,12 +309,16 @@
         numberOfDartsThrown++;
         document.querySelector('.dartCount').textContent = `Throw: ${numberOfDartsThrown + 1}`;
         if (numberOfDartsThrown === 3 && playerNumber === ~~numberOfPlayers) {
+            document.getElementById(`player${playerNumber}name`).classList.remove('activePlayer');
             playerNumber = 1;
+            document.getElementById(`player${playerNumber}name`).classList.add('activePlayer');
             numberOfDartsThrown = 0;
             document.querySelector('.gameStatus').textContent = `Turn: ${names[`player${playerNumber}name`]}`;
             document.querySelector('.dartCount').textContent = `Throw: 1`;
         } else if (numberOfDartsThrown === 3){
+            document.getElementById(`player${playerNumber}name`).classList.remove('activePlayer');
             playerNumber++;
+            document.getElementById(`player${playerNumber}name`).classList.add('activePlayer');
             numberOfDartsThrown = 0;
             document.querySelector('.gameStatus').textContent = `Turn: ${names[`player${playerNumber}name`]}`;
             document.querySelector('.dartCount').textContent = `Throw: 1`;

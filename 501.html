@@ -105,11 +105,15 @@
         color: black;
         font-size: 60px;
     }
+    .activePlayer {
+        background: yellow;
+        color: black;
+    }
 
 </style>
 <body>
     <div class="scorekeeping">
-            <span id="player1name"></span>
+            <span id="player1name" class="activePlayer"></span>
             <span id="player2name"></span>
             <span id="player3name"></span>
             <span id="player4name"></span>
@@ -236,10 +240,20 @@
                 scores[`player${playerNumber}`] = scores[`player${playerNumber}`] - total;
             }
             numberOfDartsThrown = 0;
+            document.getElementById(`player${playerNumber}name`).classList.remove('activePlayer');
+            document.getElementById(`player${playerNumber}previousScore`).classList.remove('activePlayer');
+            document.getElementById(`player${playerNumber}currentScore`).classList.remove('activePlayer');
             playerNumber++;
-
+            
             if (playerNumber === (~~numberOfPlayers + 1)) {
                 playerNumber = 1;
+                document.getElementById(`player${playerNumber}name`).classList.add('activePlayer');
+                document.getElementById(`player${playerNumber}previousScore`).classList.add('activePlayer');
+                document.getElementById(`player${playerNumber}currentScore`).classList.add('activePlayer');
+            } else {
+                document.getElementById(`player${playerNumber}name`).classList.add('activePlayer');
+                document.getElementById(`player${playerNumber}previousScore`).classList.add('activePlayer');
+                document.getElementById(`player${playerNumber}currentScore`).classList.add('activePlayer');
             }
             resetScoring();
         }

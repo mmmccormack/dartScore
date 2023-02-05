@@ -72,7 +72,9 @@
         font-family: Arial, sans-serif;
         font-size: 32px;
         text-align: center;
-        padding: 5px 0;
+        padding: 5px;
+        margin: 10px auto;
+        width: max-content;
     }
 
     .back {
@@ -93,11 +95,15 @@
         color: black;
         font-size: 60px;
     }
+    .activePlayer {
+        background: yellow;
+        color: black;
+    }
 
 </style>
 <body>
     <div class="playerNames">
-        <span id="player1name" style="font-size:20px;height:6vh;border:none;"></span>
+        <span id="player1name" class="activePlayer" style="font-size:20px;height:6vh;border:none;"></span>
         <span id="player2name" style="font-size:20px;height:6vh;border:none;"></span>
         <span id="player3name" style="font-size:20px;height:6vh;border:none;"></span>
         <span id="player4name" style="font-size:20px;height:6vh;border:none;"></span>
@@ -173,7 +179,7 @@
         <span id="player3ScoreBox">0</span>
         <span id="player4ScoreBox">0</span>
     </div>
-    <div class="gameStatus">Current player turn: </div>
+    <div class="gameStatus activePlayer">Current player turn: </div>
     <div class="dartCount">Dart number: 1</div>
     <div class="back"><a href="index.html"><span class="goBack">←</span></a></div>
 </body>
@@ -281,12 +287,16 @@
         numberOfDartsThrown++;
         document.querySelector('.dartCount').textContent = `Dart number: ${numberOfDartsThrown + 1}`;
         if (numberOfDartsThrown === 3 && playerNumber === ~~numberOfPlayers) {
+            document.getElementById(`player${playerNumber}name`).classList.remove('activePlayer');
             playerNumber = 1;
+            document.getElementById(`player${playerNumber}name`).classList.add('activePlayer');
             numberOfDartsThrown = 0;
             document.querySelector('.gameStatus').textContent = `Current player turn: ${names[`player${playerNumber}name`]}`;
             document.querySelector('.dartCount').textContent = `Dart number: 1`;
         } else if (numberOfDartsThrown === 3){
+            document.getElementById(`player${playerNumber}name`).classList.remove('activePlayer');
             playerNumber++;
+            document.getElementById(`player${playerNumber}name`).classList.add('activePlayer');
             numberOfDartsThrown = 0;
             document.querySelector('.gameStatus').textContent = `Current player turn: ${names[`player${playerNumber}name`]}`;
             document.querySelector('.dartCount').textContent = `Dart number: 1`;
